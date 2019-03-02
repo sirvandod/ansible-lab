@@ -1,0 +1,16 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "hashicorp/precise64"
+  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+#  config.vm.box_url = "https://vagrantcloud.com/hashicorp/precise64"
+  config.vm.synced_folder".","/vagrant",disabled:true
+  config.vm.synced_folder"/home/devops/myvagrants/php-apache/","/var/www/",disabled:false
+end
+  
+   config.vm.define "mysql" do |config|
+    config.vm.box = "hashicorp/precise64"
+    config.vm.hostname = "mysqlbackend"
+    config.vm.network "private_network", ip: "10.0.7.12"
+    config.vm.provision "shell", inline: "mysql.sh"
+    config.vm.synced_folder ".", "/vagrant", disabled: false
+end

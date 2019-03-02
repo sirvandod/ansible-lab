@@ -1,0 +1,10 @@
+- hosts: "all"
+  vars:
+    users:
+    - "operador1"
+    - "operador2"
+    - "operador3"
+ 
+  roles:
+    - users
+ #   - mysql

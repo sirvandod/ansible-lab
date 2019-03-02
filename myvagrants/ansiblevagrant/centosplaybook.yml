@@ -1,0 +1,10 @@
+- hosts: all
+  sudo: true
+  tasks:
+   - name: install updates using yum
+     yum:
+      state: latest
+   - name: Install apache httpd but avoid starting it immediately (state=present is optional)
+     package:
+      name: httpd
+

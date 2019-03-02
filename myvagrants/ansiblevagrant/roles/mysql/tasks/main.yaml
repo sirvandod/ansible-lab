@@ -1,0 +1,5 @@
+  - name: Install mariadb
+     package:
+      name: mariadb-server
+     when: ansible_os_family == 'RedHat'
+     become: yes

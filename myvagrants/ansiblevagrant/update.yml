@@ -1,0 +1,25 @@
+- hosts: all
+  sudo: true
+  tasks:
+   - name: upgrade debian family
+     apt: upgrade=yes update_cache=yes
+     when: ansible_os_family == 'Debian'
+     become: yes
+
+   - name: Upgrade Centos-Family
+     yum: name='*' update_only=yes update_cache=yes
+     when: ansible_os_family == 'RedHat'
+     become: yes
+   
+   - name: Install apache httpd but avoid starting it immediately (state=present is optional)
+     apt: name=apache2 update_cache=yes state=latest
+     when: ansible_os_family == 'Debian'
+     become: yes
+
+   - name: Install apache httpd but avoid starting it immediately (state=present is optional)
+     package:
+      name: httpd
+     when: ansible_os_family == 'RedHat'
+     become: yes
+
+
